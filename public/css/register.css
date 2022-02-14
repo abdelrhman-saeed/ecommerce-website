@@ -1,0 +1,78 @@
+.authentication-container {
+    margin: 5% auto;
+    padding: 0;
+}
+.row {
+    --bs-gutter-x:auto;
+}
+.authentication-container > div {
+    height: 45em;
+    padding: 0;
+    margin: 0;
+    margin-top: 10em;
+}
+.authentication-container > div > div {
+    height: 100%;
+}
+
+.authentication-container > div > div:first-child {
+    background-image: linear-gradient(90deg,#b08ead 0%,#4b3049 64%,#b08ead 100%);
+    background-size: 200% auto;
+}
+
+.signing-in-side > div {
+    margin-top: 40%;
+}
+.signing-in-side > div > * {
+    margin: 5%;
+}
+.signing-in-side > div > .btn-outline-primary {
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 3% 10%;
+}
+.signing-in-side > div > .btn-outline-primary:hover {
+    background-color: #fff;
+    color: #b08ead;
+    transition-duration: 0.5s;
+}
+.register-form .registeration-container {
+    margin-top: 0%;
+    padding: 0 10%;
+}
+.register-form .registeration-container > * {
+    margin: 5% ;
+}
+
+.user-data input {
+    background-color: transparent;
+    border-bottom: 1px solid gray;
+    border-radius: 0;
+    padding: 5% 3%;
+    width: 100%;
+}
+
+.register-form .registeration-container > form input[type="checkbox"] {
+    width: 10%;
+    margin-top: 10%;
+}
+.registeration-container input[type="submit"] {
+    width: 100%;
+    padding: 5% 0;
+    margin-top: 5%;
+    font-size: 14px;
+}
+
+.registeration-container input[type="submit"]:hover {
+    background-color: #b08ead;
+    color: #fff;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-top: 10%;
+}
+.forgot-password a {
+    text-decoration: none;
+    color: #000;
+}

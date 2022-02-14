@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Resources\UserController;
+use App\Http\Controllers\UserActions\AuthenticationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('login', [AuthenticationController::class, 'authentication']);
+Route::post('login', [AuthenticationController::class, 'authenticate']);
+
+// the registeration view and storing route
+Route::resource('users', UserController::class);
