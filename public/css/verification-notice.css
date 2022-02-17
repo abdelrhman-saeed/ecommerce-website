@@ -1,0 +1,22 @@
+.notice-message-container {
+    padding: 1em;
+    margin-top: 10em;
+}
+.notice-message {
+    margin: auto;
+    padding-bottom: 1%;
+    /* border-bottom: 1px solid #b08ead; */
+    width: 50%;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.notice-message-container i {
+    font-size: 128px;
+    color: #4b3049;
+}
+.click-verification-link {
+    color: #b08ead;
+}
+.notice-message, .reset-confirmation-email {
+    color: #4b3049;;
+}

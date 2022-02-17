@@ -24,7 +24,7 @@
                         <form action="{{url('users')}}" method="POST"> @csrf
                             <div class="user-data">
 
-                                <input type="text" name="username" id="" placeholder="Username"
+                                <input type="text" name="name" id="" placeholder="Username"
                                     class="main-border-color  @error('username') error-border @enderror">
 
                                 @error('username')

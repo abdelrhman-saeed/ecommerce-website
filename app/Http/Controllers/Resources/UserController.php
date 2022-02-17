@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Resources;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -37,15 +41,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
-            'phone' => 'required|numeric|size:11',
+            'phone' => 'required|size:11',
         ]);
 
-        User::created($request->except('_token'));
-        return redirect('/');
+        $user = $request->all();
+        $user['password'] = Hash::make($user['password']);
+
+        Auth::login($user = User::create($user));
+        Event::dispatch(new Registered($user));
+
+        return redirect(route('verification.notice'));
     }
 
     /**
@@ -56,7 +66,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.profile', ['user' => $user]);
+        if ($user->id === Auth::user()->id) {
+            return view('users.profile', ['user' => $user]);
+        }
+        return response('Unauthorized', 401);
     }
 
     /**
@@ -79,21 +92,25 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $request->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email',
-            'phone' => 'requred|numeric|size:11'
-        ]);
+        if ($user->id === auth()->user()->id) {
 
-        try {
-            $user->update($request->all());
-        }
-        catch(QueryException $e) {
-            return back()->withErrors([
-                'email' => 'this email has registred before'
+            $request->validate([
+                'name' => 'required|min:3',
+                'email' => 'required|email',
+                'phone' => 'required|size:11'
             ]);
+            
+            try {
+                $user->update($request->all());
+            }
+            catch(QueryException $e) {
+                return back()->withErrors([
+                    'email' => 'this email has registred before'
+                ]);
+            }
+            return back();
         }
-        return back();
+        return response('unauthorized', 401);
     }
 
     /**
@@ -104,6 +121,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if ($user->id === auth()->user()->id) {
+            $user->delete();
+        }
+        
+        return redirect('/home');
     }
 }

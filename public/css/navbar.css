@@ -1,9 +1,4 @@
-body {
-    margin: 0%;
-    padding: 0;
-}
 nav {
-    height: 1em;
     position: sticky;
     box-shadow: 0 10px 15px rgb(25 25 25 / 10%);
     background-color: #fff;
@@ -11,22 +6,15 @@ nav {
 
 nav .row {
     background-color: #fff !important;
-    padding-top: 1em;
 }
-nav .home-links ul {
+nav  ul {
     margin-top: 1em;
-}
-
-nav .brand {
-    font-size: 32px;
-    font-weight: 900;
-    margin-top: -1vh;
 }
 
 nav ul li {
     display: inline-block;
     margin: 0% 2%;
-    font-size: 16px;
+    font-size: 14px;
 }
 input {
     border: none;

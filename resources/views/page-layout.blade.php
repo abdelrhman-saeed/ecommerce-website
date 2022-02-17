@@ -1,4 +1,4 @@
 @include('components.header')
 @include('components.navbar')
-@yield('content')
+    @yield('content')
 @include('components.footer')

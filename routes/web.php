@@ -2,6 +2,14 @@
 
 use App\Http\Controllers\Resources\UserController;
 use App\Http\Controllers\UserActions\AuthenticationController;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Http\Request;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,13 +23,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('welcome');
+})->middleware('auth');
+
+
+Route::controller(AuthenticationController::class)->group(function () {
+    
+    Route::get('login', 'authentication')->name('login');
+    Route::post('login', 'authenticate');
+    Route::get('logout', 'logout')->name('logout');
+
+    Route::get('/email/verify','emailVerificationNotice')->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', 'verifyEmail')->name('verification.verify');
+    Route::post('/email/verification/notification', 'resendEmailVerificationNotification')->name('verification.send');
 });
 
-
-Route::get('login', [AuthenticationController::class, 'authentication']);
-Route::post('login', [AuthenticationController::class, 'authenticate']);
-
-// the registeration view and storing route
-Route::resource('users', UserController::class);
+// the registeration view and siging in route
+Route::resource('/users', UserController::class);
