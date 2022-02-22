@@ -13,24 +13,25 @@ class UserControllerTest extends TestCase
 {
    use RefreshDatabase;
 
-    public function testUserRegisteredAndStored()
-    {
+   public function testUserRegisteredAndStored()
+   {
 
-        $userinfo = [
-           'name' => 'abdelrhman',
-           'email' => 'abdelrhmanSaeed001@gmail.com',
-           'password' => 'abdelrhman',
-           'password_confirmation' => 'abdelrhman',
-           'phone' => '01022077166'
-        ];
+      $userinfo = [
+         'name' => 'abdelrhman',
+         'email' => 'abdelrhmanSaeed001@gmail.com',
+         'password' => 'abdelrhman',
+         'password_confirmation' => 'abdelrhman',
+         'phone' => '01022077166'
+      ];
 
-        $this->assertTrue(User::count() == 0);
+      $this->assertTrue(User::count() == 0);
 
-        $this->post('/users', $userinfo)
-              ->assertRedirect('/email/verify');
-              
-        $this->assertTrue(User::count() == 1);
-    }
+      $this->post('/users', $userinfo)
+            ->assertRedirect('/email/verify');
+            
+      $this->assertTrue(auth()->check());
+      $this->assertTrue(User::count() == 1);
+   }
 
     public function testUpdateMethod() {
 
