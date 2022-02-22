@@ -1,0 +1,27 @@
+html {
+    font-family: "Poppins",sans-serif;
+    font-size: 14px;
+    /* color: #b08ead; */
+}
+body {
+    background-color: #eae5fb;
+}
+
+.error-message {
+    margin: 2% 0;
+    color: #4b3049 !important;
+}
+.error-border {
+    border-color: black;
+}
+
+.main-color {
+    color: #b08ead;
+}
+.main-border-color {
+    border-color: #b08ead !important;
+}
+
+.darker-main-color {
+    color: #4b3049;
+}

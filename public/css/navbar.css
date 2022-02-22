@@ -1,0 +1,35 @@
+nav {
+    position: sticky;
+    box-shadow: 0 10px 15px rgb(25 25 25 / 10%);
+    background-color: #fff;
+}
+
+nav .row {
+    background-color: #fff !important;
+}
+nav  ul {
+    margin-top: 1em;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0% 2%;
+    font-size: 14px;
+}
+input {
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    width: 60%;
+}
+nav form div {
+    border: 1px solid #eee;
+    padding: 5% 0;
+    border-radius: 25px;
+}
+.sign-btn {
+    padding: 10% 2.5em;
+    border-radius: 25px;
+    background-color: #b08ead !important;
+    color: #fff;
+}
