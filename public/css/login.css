@@ -20,18 +20,18 @@
     background-size: 200% auto;
 }
 
-.registeration-offer > div {
-    margin-top: 40%;
-}
 .registeration-offer > div > * {
     margin: 5%;
 }
-.registeration-offer > div > .btn-outline-primary {
+.registeration-offer > div > a > .btn-outline-primary {
     color: #fff;
     border: 1px solid #fff;
     padding: 3% 10%;
 }
-.registeration-offer > div > .btn-outline-primary:hover {
+.registeration-offer > div > a {
+    text-decoration: none;
+}
+.registeration-offer > div >  a > .btn-outline-primary:hover {
     background-color: #fff;
     color: #b08ead;
     transition-duration: 0.5s;

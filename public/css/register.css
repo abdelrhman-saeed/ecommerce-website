@@ -6,7 +6,7 @@
     --bs-gutter-x:auto;
 }
 .authentication-container > div {
-    height: 45em;
+    height: 40em;
     padding: 0;
     margin: 0;
     margin-top: 10em;
@@ -20,21 +20,21 @@
     background-size: 200% auto;
 }
 
-.signing-in-side > div {
-    margin-top: 40%;
-}
 .signing-in-side > div > * {
     margin: 5%;
 }
-.signing-in-side > div > .btn-outline-primary {
+.signing-in-side > div > a >  .btn-outline-primary {
     color: #fff;
     border: 1px solid #fff;
     padding: 3% 10%;
 }
-.signing-in-side > div > .btn-outline-primary:hover {
+.signing-in-side > div > a > .btn-outline-primary:hover {
     background-color: #fff;
     color: #b08ead;
     transition-duration: 0.5s;
+}
+.signing-in-side > div > a  {
+    text-decoration: none;
 }
 .register-form .registeration-container {
     margin-top: 0%;
