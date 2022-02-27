@@ -1,16 +1,9 @@
 <?php
 
+use App\Http\Controllers\Dashboard\Resources\NotebookController;
 use App\Http\Controllers\Resources\UserController;
 use App\Http\Controllers\UserActions\AuthenticationController;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Notifications\VerifyEmail;
-use Illuminate\Http\Request;
-use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Notebook;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,3 +41,11 @@ Route::controller(AuthenticationController::class)->group(function () {
 
 // the registeration view and siging in route
 Route::resource('/users', UserController::class);
+
+// the admin dashboard for the notebooks
+Route::resource('dashboard/notebooks', NotebookController::class);
+
+Route::get('test/{notebook}', function (Notebook $notebook) {
+    dd($notebook->pictures()->get()[1]->picture_path);
+    // return NotebookPictures::where('notebook_id', $notebook->id)->get();
+});
