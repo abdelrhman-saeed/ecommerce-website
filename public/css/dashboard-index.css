@@ -122,13 +122,16 @@ body {
     background-color: #fff;
     box-shadow: -5px 5px 10px 0px #545454
 }
-.item-info .item-header .item-options p {
+.item-info .item-header .item-options input {
     margin: 0;
     padding: .5em;
     color: #1e1d1d;
+    border-radius: 0;
+    width: 100%;
+    background-color: #fff;
 }
 
-.item-info .item-header .item-options p:hover {
+.item-info .item-header .item-options input:hover {
     background-color: #eee;
 }
 select {

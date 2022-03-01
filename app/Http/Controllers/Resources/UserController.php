@@ -30,7 +30,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        if (auth()->user()->is_admin) {
+            return view('dashboard.users', ['users' => User::paginate(10)]);
+        }
+        return abort(401, 'unauthorized');
     }
 
     /**
@@ -76,7 +79,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.profile', ['user' => $user]);
+        if ($user->id === auth()->user()->id || $user->is_admin) {
+            return view('users.profile', ['user' => $user]);
+        }
+
+        return response('Unauthorized', 401);
     }
 
     /**

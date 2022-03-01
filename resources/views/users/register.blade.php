@@ -65,6 +65,14 @@
                                 <span><input type="checkbox" name="remember_me"></span>
                                 <span>Remember me</span>
                             </div>
+
+                            @if (auth()->check() && auth()->user()->is_admin)
+                                <div>
+                                    <span><input type="checkbox" name="is_admin"></span>
+                                    <span>admin</span>
+                                </div>
+                            @endif
+
                             <input type="submit" class="btn main-border-color" value="Join"/>
                         </form>
                         <div class="forgot-password text-right">

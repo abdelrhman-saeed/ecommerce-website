@@ -44,8 +44,3 @@ Route::resource('/users', UserController::class);
 
 // the admin dashboard for the notebooks
 Route::resource('dashboard/notebooks', NotebookController::class);
-
-Route::get('test/{notebook}', function (Notebook $notebook) {
-    dd($notebook->pictures()->get()[1]->picture_path);
-    // return NotebookPictures::where('notebook_id', $notebook->id)->get();
-});

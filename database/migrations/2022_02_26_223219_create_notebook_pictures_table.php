@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->smallInteger('notebook_id')->unsigned();
-            $table->foreign('notebook_id')->references('id')->on('notebooks');
+            $table->foreign('notebook_id')->references('id')->on('notebooks')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+                    
             $table->string('picture_path');
         });
     }

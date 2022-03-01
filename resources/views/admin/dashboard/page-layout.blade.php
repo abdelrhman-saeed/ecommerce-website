@@ -60,7 +60,11 @@
                 </div>
             </div>
             <div class="dashboard-items col-lg-10">
-                <div class="p-4 item-name item-type">Create Notebook</div>
+                <div class="p-4 item-name item-type" style="text-transform: capitalize">
+                    @if (request()->is('dashboard/notebooks'))
+                        {{request()->type}}
+                    @endif
+                </div>
                 <div class="items row">
                     @yield('dashboard-content')
                 </div>

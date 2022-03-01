@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\NotebookPictures;
+use Illuminate\Support\Facades\Storage;
 
 class Notebook extends Model
 {
@@ -30,5 +31,12 @@ class Notebook extends Model
 
     public function pictures() {
         return $this->hasMany(NotebookPictures::class);
+    }
+
+    public static function booted() {
+        static::deleted(function ($notebook) {
+            Storage::delete(asset($notebook->main_picture));
+            // dd(true);
+        });
     }
 }

@@ -43,27 +43,28 @@ class NotebookController extends Controller
             'name' => 'required|min:3',
             'notebook_type' => 'required|in:notebook,todo,planner',
             'price' => 'required|numeric|between:0,9999.99',
-            'discount' => 'between:0,100',
-            'quantity' => 'numeric',
-            'page_count' => 'numeric',
-            'page_weight' => 'between:0,10000',
-            'width' => 'numeric',
-            'height' => 'numeric',
+            'discount' => 'nullable|numeric|between:0,100',
+            'quantity' => 'nullable|numeric:min:0',
+            'page_count' => 'nullable|numeric',
+            'page_weight' => 'nullable|numeric|between:0,10000',
+            'width' => 'nullable|numeric',
+            'height' => 'nullable|numeric',
             'main_picture' => 'required'
         ]);
 
         $request->file('main_picture')->storeAs(
-            'public/notebook_pictures', $file_name = $request->file('main_picture')->hashName());
+            'public/notebook_pictures', $file_name = $request->file('main_picture')->hashName()
+        );
 
         $notebook = $request->all();
 
-        $notebook['main_picture'] = 'storage/notebook_pictures/'. $file_name;
+        $notebook['main_picture'] = 'notebook_pictures/'. $file_name;
         $notebook = Notebook::create($notebook);
 
-        if ($request->hasFile('other-pictures'))
+        if ($request->hasFile('other_pictures'))
         {
             $otherPictures = [];
-            foreach($request->file('other-pictures') as $otherPicture)
+            foreach($request->file('other_pictures') as $otherPicture)
             {
                 $otherPicture->storeAs('public/notebook_pictures', $file_name = $otherPicture->hashName());
 
@@ -97,7 +98,7 @@ class NotebookController extends Controller
      */
     public function edit(Notebook $notebook)
     {
-        //
+        return view('admin.dashboard.edit-notebook', ['notebook' => $notebook]);
     }
 
     /**
@@ -120,6 +121,7 @@ class NotebookController extends Controller
      */
     public function destroy(Notebook $notebook)
     {
-        //
+        $notebook->delete();
+        return redirect('dashboard/notebooks');
     }
 }

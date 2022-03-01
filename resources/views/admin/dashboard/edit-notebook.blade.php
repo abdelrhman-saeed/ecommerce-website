@@ -22,7 +22,7 @@
                         @enderror
                     </div>
 
-                    <input type="text" name="name" class="item-name col-7" id="" placeholder="item name">
+                    <input type="text" name="name" class="item-name col-7" id="" placeholder="item name" value="{{$notebook->name}}">
                     <select name="notebook_type" class="notebook-type col-3" id="select-type">
                         <option value="notebook">Notebooks</option>
                         <option value="todo">TODO</option>
@@ -44,9 +44,9 @@
                             <span class="quantity">quantity is invalid</span>
                         @enderror
                     </div>
-                    <input type="text" name="price" class="item-price col-3" id="" placeholder="price" value="{{old('price')}}">
-                    <input type="text" name="discount" class="discount col-3" id="" placeholder="discount %" value="{{old('discount')}}">
-                    <input type="text" name="quantity" class="quantity col-3" id="" placeholder="quantity" value="{{old('quantity')}}">
+                    <input type="text" name="price" class="item-price col-3" id="" placeholder="price" value="{{$notebook->price}}">
+                    <input type="text" name="discount" class="discount col-3" id="" placeholder="discount %" value="{{$notebook->discount}}">
+                    <input type="text" name="quantity" class="quantity col-3" id="" placeholder="quantity" value="{{$notebook->quantity}}">
                 </div>
                 
                 <div class="multi-column row justify-content-between m-0">
@@ -60,15 +60,15 @@
                             <span class="quantity"> page weight is invalid </span>
                         @enderror
                     </div>
-                    <input type="text" name="page_type" class="page-type col-3" id="" placeholder="page" value="{{old('page_type')}}">
-                    <input type="text" name="page_count" class="page-count col-3" id="" placeholder="page count" value="{{old('page_count')}}">
-                    <input type="text" name="page_weight" class="page-weight col-3" id="" placeholder="page weight" value="{{old('page_weight')}}">
+                    <input type="text" name="page_type" class="page-type col-3" id="" placeholder="page" value="{{$notebook->page_type}}">
+                    <input type="text" name="page_count" class="page-count col-3" id="" placeholder="page count" value="{{$notebook->page_count}}">
+                    <input type="text" name="page_weight" class="page-weight col-3" id="" placeholder="page weight" value="{{$notebook->page_weight}}">
                 </div>
 
                 <div class="multi-column row justify-content-between m-0">
-                    <input type="text" name="manufacturing_type" class="manufacturing-type col-3" id="" placeholder="type" value="{{old('manufacturing_type')}}">
-                    <input type="text" name="cover_type" class="cover col-3" id="" placeholder="cover" value="{{old('cover_type')}}">
-                    <input type="text" name="size" class="page-type col-3" id="" placeholder="size" value="{{old('page_type')}}">
+                    <input type="text" name="manufacturing_type" class="manufacturing-type col-3" id="" placeholder="type" value="{{$notebook->manufacturing_type}}">
+                    <input type="text" name="cover_type" class="cover col-3" id="" placeholder="cover" value="{{$notebook->cover_type}}">
+                    <input type="text" name="size" class="page-type col-3" id="" placeholder="size" value="{{$notebook->page_type}}">
                 </div>
 
                 <div class="multi-column row justify-content-between m-0">
@@ -81,8 +81,8 @@
                             <span class="error-message"> height is invalid </span>
                         @enderror
                     </div>
-                    <input type="text" name="width" class="notebook-width col-5" id="" placeholder="width" value="{{old('width')}}">
-                    <input type="text" name="height" class="notebook-height col-5" id="" placeholder="height" value="{{old('height')}}">
+                    <input type="text" name="width" class="notebook-width col-5" id="" placeholder="width" value="{{$notebook->width}}">
+                    <input type="text" name="height" class="notebook-height col-5" id="" placeholder="height" value="{{$notebook->height}}">
                 </div>
 
                 <div class="pictures row justify-content-between p-0">
@@ -102,7 +102,7 @@
                     </div>
                 </div>
 
-                <textarea name="details" class="details" id="" cols="30" rows="1" placeholder="details">{{old('details')}}</textarea>
+                <textarea name="details" class="details" id="" cols="30" rows="1" placeholder="details">{{$notebook->details}}</textarea>
                 <input type="submit" value="Save" class="save-item">
             </form>
 

@@ -17,13 +17,11 @@ return new class extends Migration
             $table->smallIncrements('id');
 
             $table->string('name');
-            $table->enum('notebook_type', [
-                'notebook', 'todo', 'planner'
-            ]);
+            $table->enum('notebook_type', ['notebook', 'todo', 'planner']);
 
             $table->decimal('price', 6, 2);
-            $table->tinyInteger('discount')->default(0);
-            $table->smallInteger('quantity')->default(0);
+            $table->tinyInteger('discount')->nullable();
+            $table->smallInteger('quantity')->nullable();
 
             $table->string('page_type')->nullable();
             $table->smallInteger('page_count')->nullable();
