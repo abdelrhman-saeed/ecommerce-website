@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home', function () {
     return view('welcome');
-})->middleware('auth');
+})->middleware(['auth', 'verified']);
 
 
 Route::controller(AuthenticationController::class)->group(function () {

@@ -3,16 +3,26 @@
 namespace App\Http\Controllers\Resources;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\isTheSameUser;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('guest')->only('create', 'store');
+        $this->middleware('auth')->except('create', 'store');
+        $this->middleware('verified')->except('create', 'store');
+        $this->middleware(isTheSameUser::class)->except('create', 'store');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,20 +49,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-
-        $request->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8|confirmed',
-            'phone' => 'required|size:11',
-        ]);
-
-        $user = $request->all();
-        $user['password'] = Hash::make($user['password']);
-
-        Auth::login($user = User::create($user));
+        Auth::login($user = User::create($request->all()));
         Event::dispatch(new Registered($user));
 
         return redirect(route('verification.notice'));
@@ -66,10 +65,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        if ($user->id === Auth::user()->id) {
-            return view('users.profile', ['user' => $user]);
-        }
-        return response('Unauthorized', 401);
+        return view('users.profile', ['user' => $user]);
     }
 
     /**
@@ -90,27 +86,10 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        if ($user->id === auth()->user()->id) {
-
-            $request->validate([
-                'name' => 'required|min:3',
-                'email' => 'required|email',
-                'phone' => 'required|size:11'
-            ]);
-            
-            try {
-                $user->update($request->all());
-            }
-            catch(QueryException $e) {
-                return back()->withErrors([
-                    'email' => 'this email has registred before'
-                ]);
-            }
-            return back();
-        }
-        return response('unauthorized', 401);
+        $user->update($request->all());
+        return back();
     }
 
     /**
@@ -121,10 +100,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if ($user->id === auth()->user()->id) {
-            $user->delete();
-        }
+        Gate::forUser( auth()->user() )->authorize('crudOnUser');
+        $user->delete();
         
-        return redirect('/home');
+        return redirect('/login');
     }
 }
