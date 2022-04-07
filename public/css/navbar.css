@@ -1,11 +1,13 @@
 nav {
-    position: sticky;
+    position: fixed;
+    width: 100%;
+    top: 0;
     box-shadow: 0 10px 15px rgb(25 25 25 / 10%);
     background-color: #fff;
 }
-
 nav .row {
     background-color: #fff !important;
+    margin: 0;
 }
 nav  ul {
     margin-top: 1em;

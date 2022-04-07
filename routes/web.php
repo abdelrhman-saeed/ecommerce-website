@@ -37,6 +37,12 @@ Route::controller(AuthenticationController::class)->group(function () {
     Route::get('/email/verify','emailVerificationNotice')->name('verification.notice');
     Route::get('/email/verify/{id}/{hash}', 'verifyEmail')->name('verification.verify');
     Route::post('/email/verification/notification', 'resendEmailVerificationNotification')->name('verification.send');
+
+    Route::get('/forgot-password', 'forgotPasswordPage')->name('password.request');
+    Route::post('/forgot-password', 'forgotPassword')->name('password.email');
+
+    Route::get('/reset-password/{token}', 'passwordResetPage')->name('password.reset');
+    Route::post('/reset-password/{token}', 'passwordReset');
 });
 
 // the registeration view and siging in route

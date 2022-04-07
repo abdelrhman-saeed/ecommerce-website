@@ -6,14 +6,18 @@
         <title>Sign in</title>     
     @endsection
     <body>
-        <div class="authentication-container  col-xl-7 col-lg-10 col-md-10 col-sm-12 align-items-center">
+        <div class="authentication-container  col-xl-10 col-lg-10 col-md-10 col-sm-12 align-items-center">
 
 
             <div class="col-12 row align-items-center text-light">
-                <div class="signing-in-side col-md-6 col-sm-12 text-center">
+                <div class="row align-content-center signing-in-side col-md-6 col-sm-12 text-center">
                     <div class="signing-in-side-container">
                         <h4>Already Registred?</h4>
-                        <button class="btn sign-in-btn btn-outline-primary">Sign in</button>
+                        <a href="{{url('/login')}}">
+                            <button class="btn sign-in-btn btn-outline-primary">
+                                Sign in
+                            </button>
+                        </a>
                     </div>
                 </div>
                 

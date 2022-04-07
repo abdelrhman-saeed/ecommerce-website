@@ -14,7 +14,9 @@
             <p>
                 <strong>Not receiving the email?</strong>
             </p>
-            <p class="reset-confirmation-email">Resend Confirmation email</p>
+            <form action="{{url('/email/verification/notification')}}" method="post"> @csrf
+                <input class="reset-confirmation-email" type="submit" value="Resend Confirmation email">
+            </form>
 
             @if (session()->has('emailResent'))
                 <p>{{session()->get('emailResent')}}</p>
